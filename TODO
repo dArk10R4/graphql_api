@@ -1,0 +1,6 @@
+create models
+create repositories
+create services
+create handler for every type
+connect to mysql
+test    

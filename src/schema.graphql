@@ -1,0 +1,72 @@
+type Product {
+    id: ID!
+    name: STRING!
+    inStock: BOOLEAN!
+    gallery: [STRING!]!
+    description: STRING!
+    attributes: [AttributeSet!]!
+    prices: [Price!]!
+    brand: STRING!
+    category: STRING!
+}
+
+type AttributeSet {
+    id: ID!
+    name: STRING!
+    type: STRING!
+    items: [Attribute!]!
+}
+
+type Attribute {
+    id: ID!
+    value: STRING!
+    displayValue: STRING!
+}
+
+type Price {
+    currency: Currency!
+    amount: FLOAT!
+}
+
+type Currency {
+    label: STRING!
+    symbol: STRING!
+}
+
+type Category {
+    id: ID!
+    name: STRING!
+    products: [Product!]!
+}
+
+type CartItem {
+    product: Product!
+    quantity: INT!
+}
+
+type Cart {
+    items: [CartItem!]!
+    total: Price!
+}
+
+type Order {
+    id: ID!
+    items: [CartItem!]!
+    total: Price!
+    status: STRING!
+    createdAt: STRING!
+    updatedAt: STRING!
+}
+
+type Query {
+    product(id: ID!): Product
+    products: [Product!]!
+    category(id: ID!): Category
+    categories: [Category!]!
+}
+
+type Mutation {
+    addToCart(productId: ID!, quantity: INT!): Cart
+    removeFromCart(productId: ID!): Cart
+    createOrder: Order
+}
